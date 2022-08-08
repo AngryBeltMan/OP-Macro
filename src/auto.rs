@@ -139,10 +139,9 @@ pub fn key_presser<'a>(
                         }
                         _ => {
                             let c: char = control.parse().unwrap();
-                            enigo.key_click(Key::Layout('h'));
+                            enigo.key_click(Key::Layout(c));
                         }
                     }
-                    enigo.key_click(Key::Layout('s'));
                     thr::sleep(Duration::from_millis(1000));
                 }
             }
