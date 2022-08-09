@@ -91,6 +91,7 @@ pub fn key_presser<'a>(
         .with_label("RUN MACRO")
         .with_pos(110, 260);
     b.set_callback(move |_| {
+        thr::sleep(Duration::from_secs(5));
         let s = Arc::clone(&stop);
         let mut s = s.lock().unwrap(); // makes the stop is false so It can run
         *s = false;
@@ -130,6 +131,16 @@ pub fn key_presser<'a>(
                         }
                         "<Rclick>" => {
                             enigo.mouse_click(MouseButton::Right);
+                        }
+                        "|<click>" => {
+                            enigo.mouse_down(MouseButton::Left);
+                            thr::sleep(Duration::from_millis(1100));
+                            enigo.mouse_up(MouseButton::Left)
+                        }
+                        "|<Rclick>" => {
+                            enigo.mouse_down(MouseButton::Right);
+                            thr::sleep(Duration::from_secs(1));
+                            enigo.mouse_up(MouseButton::Right);
                         }
                         control if control.contains("|") => {
                             let c: char = control.replace("|", "").parse().unwrap();
