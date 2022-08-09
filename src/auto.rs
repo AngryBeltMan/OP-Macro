@@ -32,11 +32,11 @@ pub fn auto_clicker(
         let a = Arc::clone(&stop);
         let num = Arc::clone(&num);
         let _thread1 = thr::spawn(move || {
-            thr::sleep(Duration::from_secs(5));
             let repeat_num = rep.lock().unwrap();
             let delay = num.lock().unwrap();
             let mut e = Enigo::new();
             e.mouse_move_to(500, 100); // move the mouse away from the button
+            thr::sleep(Duration::from_secs(5));
             for _ in 1..=*repeat_num {
                 let check = a.lock().unwrap();
                 if *check == true {
